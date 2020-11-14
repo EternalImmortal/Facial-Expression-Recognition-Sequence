@@ -141,7 +141,8 @@ def test(epoch):
 
         if use_cuda:
             inputs, targets = inputs.cuda(), targets.cuda()
-        inputs, targets = Variable(inputs, volatile=True), Variable(targets)
+        with torch.no_grad():
+            inputs, targets = Variable(inputs), Variable(targets)
         outputs = net(inputs)
         outputs_avg = outputs.view(bs, ncrops, -1).mean(1)  # avg over crops
 
