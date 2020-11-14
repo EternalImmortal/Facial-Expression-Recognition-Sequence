@@ -44,7 +44,7 @@ class CK(data.Dataset):
             if i not in test_index:
                 train_index.append(i)
 
-        print(len(train_index), len(test_index))
+        # print(len(train_index), len(test_index))
 
         # now load the picked numpy arrays
         if self.split == 'Training':

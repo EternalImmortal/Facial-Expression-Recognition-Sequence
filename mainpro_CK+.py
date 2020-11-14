@@ -45,7 +45,7 @@ total_epoch = 60
 path = os.path.join(opt.dataset + '_' + opt.model, str(opt.fold))
 
 # Data
-print('==> Preparing data..')
+# print('==> Preparing data..')
 transform_train = transforms.Compose([
     transforms.RandomCrop(cut_size),
     transforms.RandomHorizontalFlip(),
@@ -78,8 +78,8 @@ if opt.resume:
     best_Test_acc = checkpoint['best_Test_acc']
     best_Test_acc_epoch = checkpoint['best_Test_acc_epoch']
     start_epoch = best_Test_acc_epoch + 1
-else:
-    print('==> Building model..')
+# else:
+#     print('==> Building model..')
 
 if use_cuda:
     net.cuda()
