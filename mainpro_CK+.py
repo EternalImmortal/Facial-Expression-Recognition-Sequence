@@ -24,8 +24,10 @@ parser.add_argument('--fold', default=1, type=int, help='k fold number')
 parser.add_argument('--bs', default=128, type=int, help='batch_size')
 parser.add_argument('--lr', default=0.01, type=float, help='learning rate')
 parser.add_argument('--resume', '-r', action='store_true', help='resume from checkpoint')
-parser.add_argument('--show_details', default=1, help="whether show the progress of each epoch")
+parser.add_argument('--show_details', default=1, type=int, help="whether show the progress of each epoch")
 opt = parser.parse_args()
+
+detail = opt.show_details
 
 use_cuda = torch.cuda.is_available()
 
@@ -88,7 +90,7 @@ optimizer = optim.SGD(net.parameters(), lr=opt.lr, momentum=0.9, weight_decay=5e
 
 # Training
 def train(epoch):
-    if opt.show_details:
+    if detail:
         print('\nEpoch: %d' % epoch)
     global Train_acc
     net.train()
@@ -103,7 +105,7 @@ def train(epoch):
         utils.set_lr(optimizer, current_lr)  # set the decayed rate
     else:
         current_lr = opt.lr
-    if opt.show_details:
+    if detail:
         print('learning_rate: %s' % str(current_lr))
 
     for batch_idx, (inputs, targets) in enumerate(trainloader):
@@ -124,7 +126,7 @@ def train(epoch):
         total += targets.size(0)
         correct += predicted.eq(targets.data).cpu().sum()
 
-        if opt.show_details:
+        if detail:
             utils.progress_bar(batch_idx, len(trainloader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
                                % (train_loss / (batch_idx + 1), 100. * correct / total, correct, total))
 
@@ -155,7 +157,7 @@ def test(epoch):
         _, predicted = torch.max(outputs_avg.data, 1)
         total += targets.size(0)
         correct += predicted.eq(targets.data).cpu().sum()
-        if opt.show_details:
+        if detail:
             utils.progress_bar(batch_idx, len(testloader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
                                % (PrivateTest_loss / (batch_idx + 1), 100. * correct / total, correct, total))
 
