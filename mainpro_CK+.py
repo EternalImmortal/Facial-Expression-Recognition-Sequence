@@ -24,7 +24,7 @@ parser.add_argument('--fold', default=1, type=int, help='k fold number')
 parser.add_argument('--bs', default=128, type=int, help='batch_size')
 parser.add_argument('--lr', default=0.01, type=float, help='learning rate')
 parser.add_argument('--resume', '-r', action='store_true', help='resume from checkpoint')
-parser.add_argument('--show_details', default=True, type=bool, help="whether show the progress of each epoch")
+parser.add_argument('--show_details', default=1, help="whether show the progress of each epoch")
 opt = parser.parse_args()
 
 use_cuda = torch.cuda.is_available()
@@ -124,8 +124,9 @@ def train(epoch):
         total += targets.size(0)
         correct += predicted.eq(targets.data).cpu().sum()
 
-        utils.progress_bar(batch_idx, len(trainloader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
-                           % (train_loss / (batch_idx + 1), 100. * correct / total, correct, total))
+        if opt.show_details:
+            utils.progress_bar(batch_idx, len(trainloader), 'Loss: %.3f | Acc: %.3f%% (%d/%d)'
+                               % (train_loss / (batch_idx + 1), 100. * correct / total, correct, total))
 
     Train_acc = 100. * correct / total
 
