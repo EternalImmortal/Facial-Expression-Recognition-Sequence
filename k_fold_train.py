@@ -11,6 +11,6 @@ for i in range(10):
     if opt.show_details:
         cmd += " --show_details 0"
     if opt.resume:
-        cmd += "--resume"
+        cmd += " --resume"
     os.system(cmd)
 print("Train VGG19 ok!")
