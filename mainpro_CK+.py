@@ -146,7 +146,7 @@ def test(epoch):
         outputs_avg = outputs.view(bs, ncrops, -1).mean(1)  # avg over crops
 
         loss = criterion(outputs_avg, targets)
-        PrivateTest_loss += loss.data[0]
+        PrivateTest_loss += loss.item()
         _, predicted = torch.max(outputs_avg.data, 1)
         total += targets.size(0)
         correct += predicted.eq(targets.data).cpu().sum()
