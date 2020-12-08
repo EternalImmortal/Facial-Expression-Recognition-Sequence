@@ -26,7 +26,7 @@ parser.add_argument('--bs', default=128, type=int, help='batch_size')
 parser.add_argument('--lr', default=0.01, type=float, help='learning rate')
 parser.add_argument('--resume', '-r', action='store_true', help='resume from checkpoint')
 parser.add_argument('--show_details', default=1, type=int, help="whether show the progress of each epoch")
-parser.add_argument('--cut_size', default=44, type=int)
+parser.add_argument('--cut_size', default=48, type=int)
 opt = parser.parse_args()
 
 detail = opt.show_details
