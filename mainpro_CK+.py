@@ -181,9 +181,8 @@ def test(epoch):
     Test_acc = 100. * correct / total
 
     if Test_acc > best_Test_acc:
-        if detail:
-            print('Saving..')
-            print("best_Test_acc: %0.3f" % Test_acc)
+        print('Saving..')
+        print("best_Test_acc: %0.3f" % Test_acc)
         state = {'net': net.state_dict() if use_cuda else net,
                  'best_Test_acc': Test_acc,
                  'best_Test_acc_epoch': epoch,
