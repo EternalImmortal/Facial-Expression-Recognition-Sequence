@@ -20,7 +20,7 @@ from models import *
 
 parser = argparse.ArgumentParser(description='PyTorch CK+ CNN Training')
 parser.add_argument('--model', type=str, default='VGG19', help='CNN architecture')
-parser.add_argument('--dataset', type=str, default='CK+', help='dataset')
+parser.add_argument('--dataset', type=str, default='CK+Mask', help='dataset')
 parser.add_argument('--fold', default=1, type=int, help='k fold number')
 parser.add_argument('--bs', default=128, type=int, help='batch_size')
 parser.add_argument('--lr', default=0.01, type=float, help='learning rate')
@@ -41,6 +41,7 @@ learning_rate_decay_every = 1  # 5
 learning_rate_decay_rate = 0.8  # 0.9
 
 cut_size = 44
+cut_size_mask = 60
 total_epoch = 60
 
 path = os.path.join(opt.dataset + '_' + opt.model, str(opt.fold))
@@ -54,7 +55,7 @@ transform_train = transforms.Compose([
 ])
 
 transform_train_mask = transforms.Compose([
-    transforms.RandomCrop(cut_size),
+    transforms.RandomCrop(cut_size_mask),
     transforms.RandomHorizontalFlip(),
     transforms.ToTensor(),
 ])
@@ -65,7 +66,7 @@ transform_test = transforms.Compose([
 ])
 
 transform_test_mask = transforms.Compose([
-    transforms.TenCrop(cut_size),
+    transforms.TenCrop(cut_size_mask),
     transforms.Lambda(lambda crops: torch.stack([transforms.ToTensor()(crop) for crop in crops])),
 ])
 
