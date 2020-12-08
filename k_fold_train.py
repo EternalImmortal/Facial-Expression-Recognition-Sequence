@@ -11,7 +11,7 @@ for i in range(10):
     cmd = 'python mainpro_CK+.py --bs 128 --lr 0.01 --fold %d' % (i + 1)
     if opt.model == 'Resnet18':
         cmd += " --model Resnet18"
-    if opt.show_details:
+    if opt.hide_details:
         cmd += " --show_details 0"
     if opt.resume:
         cmd += " --resume"
