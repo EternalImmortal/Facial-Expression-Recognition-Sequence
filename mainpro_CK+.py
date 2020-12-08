@@ -14,6 +14,7 @@ import os
 import argparse
 import utils
 from CK import CK
+from CK_Mask import CK_Mask
 from torch.autograd import Variable
 from models import *
 
@@ -57,9 +58,9 @@ transform_test = transforms.Compose([
     transforms.Lambda(lambda crops: torch.stack([transforms.ToTensor()(crop) for crop in crops])),
 ])
 
-trainset = CK(split='Training', fold=opt.fold, transform=transform_train)
+trainset = CK_Mask(split='Training', fold=opt.fold, transform=transform_train)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=opt.bs, shuffle=True, num_workers=1)
-testset = CK(split='Testing', fold=opt.fold, transform=transform_test)
+testset = CK_Mask(split='Testing', fold=opt.fold, transform=transform_test)
 testloader = torch.utils.data.DataLoader(testset, batch_size=5, shuffle=False, num_workers=1)
 
 # Model

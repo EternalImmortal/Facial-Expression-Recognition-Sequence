@@ -8,7 +8,8 @@ import numpy as np
 import h5py
 import skimage.io
 
-ck_path = 'CK+48'
+# ck_path = 'CK+48'
+ck_path = 'CK+Mask'
 
 anger_path = os.path.join(ck_path, 'anger')
 disgust_path = os.path.join(ck_path, 'disgust')
@@ -22,9 +23,10 @@ contempt_path = os.path.join(ck_path, 'contempt')
 data_x = []
 data_y = []
 
-datapath = os.path.join('data', 'CK_data.h5')
-if not os.path.exists(os.path.dirname(datapath)):
-    os.makedirs(os.path.dirname(datapath))
+# data_path = os.path.join('data', 'CK_data.h5')
+data_path = os.path.join('data', 'CK_mask_data.h5')
+if not os.path.exists(os.path.dirname(data_path)):
+    os.makedirs(os.path.dirname(data_path))
 
 # order the file, so the training set will not contain the test set (don't random)
 files = os.listdir(anger_path)
@@ -79,7 +81,7 @@ for filename in files:
 print(np.shape(data_x))
 print(np.shape(data_y))
 
-datafile = h5py.File(datapath, 'w')
+datafile = h5py.File(data_path, 'w')
 datafile.create_dataset("data_pixel", dtype='uint8', data=data_x)
 datafile.create_dataset("data_label", dtype='int64', data=data_y)
 datafile.close()

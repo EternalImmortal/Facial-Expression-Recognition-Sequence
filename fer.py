@@ -6,6 +6,7 @@ import numpy as np
 import h5py
 import torch.utils.data as data
 
+
 class FER2013(data.Dataset):
     """`FER2013 Dataset.
 
