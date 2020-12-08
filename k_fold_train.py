@@ -16,4 +16,3 @@ for i in range(10):
     if opt.resume:
         cmd += " --resume"
     os.system(cmd)
-print("Train VGG19 ok!")
