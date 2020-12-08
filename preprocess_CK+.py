@@ -32,49 +32,63 @@ if not os.path.exists(os.path.dirname(data_path)):
 files = os.listdir(anger_path)
 files.sort()
 for filename in files:
-    I = skimage.io.imread(os.path.join(anger_path, filename))
+    if filename.startswith('.'):
+        continue
+    I = skimage.io.imread(os.path.join(anger_path, filename), as_gray=True)
     data_x.append(I.tolist())
     data_y.append(0)
 
 files = os.listdir(disgust_path)
 files.sort()
 for filename in files:
-    I = skimage.io.imread(os.path.join(disgust_path, filename))
+    if filename.startswith('.'):
+        continue
+    I = skimage.io.imread(os.path.join(disgust_path, filename), as_gray=True)
     data_x.append(I.tolist())
     data_y.append(1)
 
 files = os.listdir(fear_path)
 files.sort()
 for filename in files:
-    I = skimage.io.imread(os.path.join(fear_path, filename))
+    if filename.startswith('.'):
+        continue
+    I = skimage.io.imread(os.path.join(fear_path, filename), as_gray=True)
     data_x.append(I.tolist())
     data_y.append(2)
 
 files = os.listdir(happy_path)
 files.sort()
 for filename in files:
-    I = skimage.io.imread(os.path.join(happy_path, filename))
+    if filename.startswith('.'):
+        continue
+    I = skimage.io.imread(os.path.join(happy_path, filename), as_gray=True)
     data_x.append(I.tolist())
     data_y.append(3)
 
 files = os.listdir(sadness_path)
 files.sort()
 for filename in files:
-    I = skimage.io.imread(os.path.join(sadness_path, filename))
+    if filename.startswith('.'):
+        continue
+    I = skimage.io.imread(os.path.join(sadness_path, filename), as_gray=True)
     data_x.append(I.tolist())
     data_y.append(4)
 
 files = os.listdir(surprise_path)
 files.sort()
 for filename in files:
-    I = skimage.io.imread(os.path.join(surprise_path, filename))
+    if filename.startswith('.'):
+        continue
+    I = skimage.io.imread(os.path.join(surprise_path, filename), as_gray=True)
     data_x.append(I.tolist())
     data_y.append(5)
 
 files = os.listdir(contempt_path)
 files.sort()
 for filename in files:
-    I = skimage.io.imread(os.path.join(contempt_path, filename))
+    if filename.startswith('.'):
+        continue
+    I = skimage.io.imread(os.path.join(contempt_path, filename), as_gray=True)
     data_x.append(I.tolist())
     data_y.append(6)
 

@@ -53,14 +53,27 @@ transform_train = transforms.Compose([
     transforms.ToTensor(),
 ])
 
+transform_train_mask = transforms.Compose([
+    transforms.RandomCrop(cut_size),
+    transforms.RandomHorizontalFlip(),
+    transforms.ToTensor(),
+])
+
 transform_test = transforms.Compose([
     transforms.TenCrop(cut_size),
     transforms.Lambda(lambda crops: torch.stack([transforms.ToTensor()(crop) for crop in crops])),
 ])
 
-trainset = CK_Mask(split='Training', fold=opt.fold, transform=transform_train)
+transform_test_mask = transforms.Compose([
+    transforms.TenCrop(cut_size),
+    transforms.Lambda(lambda crops: torch.stack([transforms.ToTensor()(crop) for crop in crops])),
+])
+
+# trainset = CK(split='Training', fold=opt.fold, transform=transform_train)
+trainset = CK_Mask(split='Training', fold=opt.fold, transform=transform_train_mask)
 trainloader = torch.utils.data.DataLoader(trainset, batch_size=opt.bs, shuffle=True, num_workers=1)
-testset = CK_Mask(split='Testing', fold=opt.fold, transform=transform_test)
+# testset = CK(split='Testing', fold=opt.fold, transform=transform_test)
+testset = CK_Mask(split='Testing', fold=opt.fold, transform=transform_test_mask)
 testloader = torch.utils.data.DataLoader(testset, batch_size=5, shuffle=False, num_workers=1)
 
 # Model
