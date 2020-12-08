@@ -24,7 +24,7 @@ class CK_Mask(data.Dataset):
         self.transform = transform
         self.split = split  # training set or test set
         self.fold = fold  # the k-fold cross validation
-        self.data = h5py.File('./data/CK_mask_data', 'r', driver='core')
+        self.data = h5py.File('./data/CK_mask_data.h5', 'r', driver='core')
 
         number = len(self.data['data_label'])  # 981
         sum_number = [0, 135, 312, 387, 594, 678, 927, 981]  # the sum of class number
