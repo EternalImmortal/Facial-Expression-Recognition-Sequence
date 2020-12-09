@@ -1,7 +1,8 @@
 import os
 import argparse
+
 parser = argparse.ArgumentParser(description='PyTorch CK+ CNN Training')
-parser.add_argument('--hide_details', help="whether show the progress of each epoch")
+parser.add_argument('--hide_details', action='store_true', help="whether show the progress of each epoch")
 parser.add_argument('--resume', '-r', action='store_true', help='resume from checkpoint')
 parser.add_argument('--model', default='VGG19')
 opt = parser.parse_args()

@@ -94,8 +94,8 @@ if opt.resume:
     best_Test_acc = checkpoint['best_Test_acc']
     best_Test_acc_epoch = checkpoint['best_Test_acc_epoch']
     start_epoch = best_Test_acc_epoch + 1
-# else:
-#     print('==> Building model..')
+else:
+    print('==> Building model..')
 
 if use_cuda:
     net.cuda()
